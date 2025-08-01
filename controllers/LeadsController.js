@@ -27,7 +27,6 @@ const LeadsController = {
             const [results] = await pool.query(
                 'INSERT INTO Contacto (Nombre, Correo, Telefono, Mensaje, EstadoId) VALUES (?, ?, ?, ?, ?)',
                 [nombre, correo, telefono, mensaje, '1'])
-
                 const date = new Date()
 
                 const response = await emailjs.send(process.env.EMAILJS_SERVICEID,process.env.EMAILJS_ADMINTEMPLATEID,{
@@ -56,7 +55,7 @@ const LeadsController = {
             const [results] = await pool.query('UPDATE Contacto SET EstadoId = ? WHERE Id = ?', [estadoId, id])
 
             if(results.affectedRows > 0){
-                return res.status(201).send('Cambiado correctamente')
+                return res.status(200).send('Modificado Exitosamente')
             }
                 return res.status(500).send('Huh?')
             
@@ -67,9 +66,9 @@ const LeadsController = {
 
     deleteLeadStatus: async (req,res) => {
         try {
-            
+
             const { id } = req.params
-            
+
             const [results] = await pool.query('DELETE FROM Contacto WHERE Id = ?', [id])
             
             if(results.affectedRows > 0){
@@ -81,6 +80,7 @@ const LeadsController = {
             return res.status(500).send({message: 'Something went wrong - 500', error: error})
         }
     }
+
 }
 
 export default LeadsController

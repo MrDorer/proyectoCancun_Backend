@@ -1,0 +1,10 @@
+services:
+  backend:
+    container_name: expresssss
+    build: .
+    ports:
+      - 8082:8082
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+
+
